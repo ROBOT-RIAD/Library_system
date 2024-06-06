@@ -1,0 +1,32 @@
+{% extends "cores/base.html" %}
+{% block title %} Profile {% endblock %}
+{% block body %}
+  <div class="full-height" style="height: 100vh; overflow-y: auto;">
+    <table class="table-auto" style="border-collapse: collapse; width: 100%;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid black;">Serial</th>
+            <th style="border: 1px solid black;">Book Title</th>
+            <th style="border: 1px solid black;">Book Description</th>
+            <th style="border: 1px solid black;">Book Image</th>
+            <th style="border: 1px solid black;">Book Price</th>
+            <th style="border: 1px solid black;">Book Detaile</th>
+            <th style="border: 1px solid black;">Book Return</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr>
+            <td style="border: 1px solid black;">{{ book.id }}</td>
+            <td style="border: 1px solid black;">{{ book.title }}</td>
+            <td style="border: 1px solid black;">{{ book.description|truncatewords:5 }}</td>
+            <td style="border: 1px solid black;"><img src="{{ book.image.url }}" alt="{{ book.title }}" style="width: 100px; height: 100px;"></td>
+            <td style="border: 1px solid black;">{{ book.price }}</td>
+            <td style="border: 1px solid black;"><a href="{%url 'detaile' book.id %}" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Detaile</a></td>
+            <td style="border: 1px solid black;"><a href="{%url 'return' book.id %}" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Return</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endblock %}

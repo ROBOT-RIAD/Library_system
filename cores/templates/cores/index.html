@@ -1,0 +1,44 @@
+{% extends "cores/base.html" %}
+{% block title %}
+           LIBRARY HOME
+{% endblock %}
+
+{%block body%}
+
+<div class="flex">
+  <div class="w-1/4 p-4">
+    <a href="{%url 'home'%}" class="block mb-2 bg-blue-500 text-white text-center py-2 rounded">
+      ALL
+  </a>
+      {% for category in book_categories %}
+      <a href="{%url 'home_by_brand' category.slug %}" class="block mb-2 bg-blue-500 text-white text-center py-2 rounded">
+          {{ category.name }}
+      </a>
+      {% endfor %}
+  </div>
+
+  <div class="w-3/4 p-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% for book in data %}
+          <div class="bg-white shadow-md rounded-lg overflow-hidden">
+              {% if book.image %}
+              <img src="{{ book.image.url }}" class="w-full h-48 object-cover" alt="{{ book.title }}">
+              {% else %}
+              <img src="https://via.placeholder.com/150" class="w-full h-48 object-cover" alt="{{ book.title }}">
+              {% endif %}
+              <div class="p-4">
+                  <h5 class="font-bold text-lg">{{ book.title }}</h5>
+                  <p class="text-gray-700 text-sm mt-2">{{ book.description|truncatewords:20 }}</p>
+                  <p class="text-gray-900 mt-2"><strong>Price:</strong> ${{ book.price }}</p>
+                  <p class="text-gray-600"><strong>Category:</strong> {{ book.book_category.name }}</p>
+                  <a href="{%url 'detaile' book.id %}" class="block mb-2 bg-blue-500 text-white text-center py-2 rounded">detailes </a>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</div>
+
+
+  
+{%endblock%}
