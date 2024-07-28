@@ -1,0 +1,1 @@
+![](./library_entity_diagram.drawio.svg)
